@@ -118,14 +118,3 @@ def disconnect(request: Request, settings: Settings = Depends(get_settings), _: 
             s.commit()
     sec.audit("kite_disconnect", ip=sec.client_ip(request))
     return {"connected": False}
-
-
-@router.get("/portfolio")
-def portfolio(c: kite.KiteClient = Depends(client)):
-    """Raw Zerodha figures with fetch timestamp. Reconciliation and derived metrics come in stage 6."""
-    fetched = datetime.now(timezone.utc).isoformat()
-    try:
-        return {"source": "Zerodha Kite Connect", "fetched_at": fetched,
-                "positions": c.positions(), "margins": c.margins()}
-    except kite.KiteError as e:
-        raise HTTPException(502 if e.status != 403 else 409, f"Zerodha error: {e.error_type}: {e.message}")

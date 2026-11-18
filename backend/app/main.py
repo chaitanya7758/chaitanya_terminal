@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 
-from app.api import auth, fibonacci, kite, market
+from app.api import auth, brief, fibonacci, kite, market, portfolio
 
 app = FastAPI(title="Chaitanya's Terminal API", version="0.1.0", docs_url=None, redoc_url=None)
 app.include_router(auth.router)
 app.include_router(fibonacci.router)
 app.include_router(kite.router)
 app.include_router(market.router)
+app.include_router(portfolio.router)
+app.include_router(brief.router)
 
 
 @app.middleware("http")
