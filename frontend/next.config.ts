@@ -5,6 +5,7 @@ const API = process.env.CT_API_INTERNAL_URL || "http://127.0.0.1:8000";
 const nextConfig: NextConfig = {
   output: "standalone",
   poweredByHeader: false,
+  allowedDevOrigins: ["127.0.0.1"],
   async rewrites() {
     return [{ source: "/api/:path*", destination: `${API}/api/:path*` }];
   },
