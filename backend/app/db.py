@@ -22,6 +22,20 @@ class KiteSession(Base):
     revoked: Mapped[int] = mapped_column(Integer, default=0)
 
 
+class BriefItem(Base):
+    """One manually entered, sourced brief line. Latest row per (day, slot) wins; history is kept."""
+
+    __tablename__ = "brief_item"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    day: Mapped[str] = mapped_column(String(10), index=True)  # IST date YYYY-MM-DD
+    slot: Mapped[int] = mapped_column(Integer)  # 1-10 points, 11 = closing sentence
+    text: Mapped[str] = mapped_column(Text)
+    source_name: Mapped[str] = mapped_column(String(200), default="")
+    source_url: Mapped[str] = mapped_column(String(1000), default="")
+    as_of: Mapped[str] = mapped_column(String(64), default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+
 class AuditLog(Base):
     __tablename__ = "audit_log"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)

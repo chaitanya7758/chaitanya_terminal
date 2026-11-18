@@ -66,7 +66,7 @@ def test_status_not_connected(client):
     login(client)
     s = client.get("/api/kite/status").json()
     assert s["configured"] and not s["connected"] and s["mode"] == "read-only"
-    assert client.get("/api/kite/portfolio").status_code == 409
+    assert client.get("/api/portfolio").status_code == 409
 
 
 def test_full_login_flow(client, monkeypatch):
