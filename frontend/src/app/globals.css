@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f5f6f8; --panel: #ffffff; --panel-2: #eef0f3; --line: #d9dde3;
+  --text: #15181d; --muted: #5d6673; --accent: #b8860b;
+  --up: #15803d; --down: #b91c1c; --warn: #a16207;
+}
+.dark {
+  --bg: #121417; --panel: #1a1d21; --panel-2: #22262b; --line: #2e333a;
+  --text: #e6e8eb; --muted: #8b939e; --accent: #d4a73a;
+  --up: #34c178; --down: #f0605d; --warn: #e0b341;
+}
+@theme inline {
+  --color-bg: var(--bg); --color-panel: var(--panel); --color-panel-2: var(--panel-2);
+  --color-line: var(--line); --color-text: var(--text); --color-muted: var(--muted);
+  --color-accent: var(--accent); --color-up: var(--up); --color-down: var(--down); --color-warn: var(--warn);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+html, body { background: var(--bg); color: var(--text); }
+body { font-family: var(--font-sans); -webkit-tap-highlight-color: transparent; }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
